@@ -116,19 +116,19 @@ UITableViewDataSource>
             self.dataSource = dataSource.mutableCopy;
             [self.tableView reloadData];
         }else if([self _isMutilSection]){
-            [self.dataSource addObjectsFromArray:dataSource];
             NSRange range = NSMakeRange(self.dataSource.count, dataSource.count);
             NSIndexSet * inset = [NSIndexSet indexSetWithIndexesInRange:range];
+            [self.dataSource addObjectsFromArray:dataSource];
             [self.tableView beginUpdates];
             [self.tableView insertSections:inset withRowAnimation:UITableViewRowAnimationNone];
             [self.tableView endUpdates];
         }else{
-            [self.dataSource addObjectsFromArray:dataSource];
             NSMutableArray * paths = @[].mutableCopy;
             for (int i=0; i<dataSource.count; ++i) {
                 NSIndexPath * p = [NSIndexPath indexPathForRow:self.dataSource.count+i inSection:0];
                 [paths addObject:p];
             }
+            [self.dataSource addObjectsFromArray:dataSource];
             [self.tableView beginUpdates];
             [self.tableView insertRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationNone];
             [self.tableView endUpdates];
