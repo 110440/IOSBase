@@ -41,7 +41,7 @@
     self.navigationController.navigationBar.translucent = NO;
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
-    [[XFServiceViewController sharedController] show];
+    
 
     UIImage * bg = [UIImage imageNamed:@"navigation_bar_bj"];
     if([self showNavShadow]){

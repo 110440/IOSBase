@@ -40,7 +40,5 @@
 
 +(BOOL)isFirstInstallApp;
 
-+(void)updateShopCartBadgeValue:(NSInteger)badgeValue;
 
-+(void)pushJXServiceVC; //在线客服
 @end

@@ -7,8 +7,6 @@
 //
 
 #import "Utils.h"
-#import "JXSDKHelper.h"
-#import "JXMCSUserManager.h"
 
 @implementation Utils
 
@@ -119,45 +117,16 @@
     }
     return !v;
 }
+//
+//+(void)updateShopCartBadgeValue:(NSInteger)badgeValue{
+//    UITabBarController * root = (UITabBarController*)[UIApplication sharedApplication].keyWindow.rootViewController;
+//    UITabBarItem *tabItem = root.tabBar.items[3];
+//    if(badgeValue >0){
+//        tabItem.badgeValue = [NSString stringWithFormat:@"%ld",badgeValue];
+//    }else{
+//        tabItem.badgeValue = nil;
+//    }
+//}
 
-+(void)updateShopCartBadgeValue:(NSInteger)badgeValue{
-    UITabBarController * root = (UITabBarController*)[UIApplication sharedApplication].keyWindow.rootViewController;
-    UITabBarItem *tabItem = root.tabBar.items[3];
-    if(badgeValue >0){
-        tabItem.badgeValue = [NSString stringWithFormat:@"%ld",badgeValue];
-    }else{
-        tabItem.badgeValue = nil;
-    }
-}
 
-+(void)pushJXServiceVC{
-    
-    UIViewController * top = [Utils topViewController];
-    if(![[UserManager shareManager] isLogined]){
-        [UserManager showLoginWithVc:top completion:^{}];
-        return;
-    }
-    
-    JXMCSUserManager * jxMgr = [JXMCSUserManager sharedInstance];
-    JXMcsChatConfig * config = [JXMcsChatConfig defaultConfig];
-    config.navTitleColor = [UIColor whiteColor];
-    config.showMsgBoxItem = NO;
-    
-    if([jxMgr isLogin]){
-        [[XFServiceViewController sharedController] hide];
-        [jxMgr requestCSForUI:top.navigationController witConfig:config];
-        return;
-    }
-    
-    [sJXHUD showMessageWithActivityIndicatorView:@"正在登录..."];
-    [jxMgr loginWithCallback:^(BOOL success, id response) {
-        [sJXHUD hideHUD];
-        if(success){
-            [[XFServiceViewController sharedController] hide];
-            [jxMgr requestCSForUI:top.navigationController witConfig:config];
-        }else{
-            [Utils showErrMsg:@"登陆失败"];
-        }
-    }];
-}
 @end

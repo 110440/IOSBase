@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TTImageClipperViewController">
+            <connections>
+                <outlet property="coverView" destination="8o4-BG-xx1" id="2Zt-2p-bb5"/>
+                <outlet property="rectView" destination="RKJ-di-8sW" id="pJ7-wy-edo"/>
+                <outlet property="scrollView" destination="ITL-1P-AMd" id="yvJ-vP-NI8"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ITL-1P-AMd">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </scrollView>
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8o4-BG-xx1">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.48533818493150682" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cjf-7e-Apx">
+                    <rect key="frame" x="0.0" y="607" width="375" height="60"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SSl-Ct-ZKo">
+                            <rect key="frame" x="0.0" y="0.0" width="120" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="120" id="O8z-Pe-xLp"/>
+                            </constraints>
+                            <state key="normal" title="取消">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="onCancell:" destination="-1" eventType="touchUpInside" id="99m-wh-Edw"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gql-II-h7t">
+                            <rect key="frame" x="255" y="0.0" width="120" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="120" id="9LD-KV-4gy"/>
+                            </constraints>
+                            <state key="normal" title="确定">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="onOK:" destination="-1" eventType="touchUpInside" id="OZh-jn-fy0"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.12637259066104889" green="0.12639245390892029" blue="0.12636536359786987" alpha="0.73282320205479456" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="gql-II-h7t" secondAttribute="trailing" id="QW8-EF-jfe"/>
+                        <constraint firstItem="gql-II-h7t" firstAttribute="top" secondItem="cjf-7e-Apx" secondAttribute="top" id="S8v-Be-72z"/>
+                        <constraint firstAttribute="height" constant="60" id="ZEn-pb-qXc"/>
+                        <constraint firstAttribute="bottom" secondItem="gql-II-h7t" secondAttribute="bottom" id="cIj-Iu-GjK"/>
+                        <constraint firstAttribute="bottom" secondItem="SSl-Ct-ZKo" secondAttribute="bottom" id="hRj-0R-Rbf"/>
+                        <constraint firstItem="SSl-Ct-ZKo" firstAttribute="leading" secondItem="cjf-7e-Apx" secondAttribute="leading" id="hjQ-MI-Hjf"/>
+                        <constraint firstItem="SSl-Ct-ZKo" firstAttribute="top" secondItem="cjf-7e-Apx" secondAttribute="top" id="pdR-Cu-J5c"/>
+                    </constraints>
+                </view>
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RKJ-di-8sW">
+                    <rect key="frame" x="67" y="269" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="cjf-7e-Apx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5uJ-8N-JCn"/>
+                <constraint firstAttribute="trailing" secondItem="cjf-7e-Apx" secondAttribute="trailing" id="ART-Ug-RbG"/>
+                <constraint firstAttribute="bottom" secondItem="ITL-1P-AMd" secondAttribute="bottom" id="Hab-L2-VUu"/>
+                <constraint firstItem="8o4-BG-xx1" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="JdC-fu-7k2"/>
+                <constraint firstAttribute="trailing" secondItem="8o4-BG-xx1" secondAttribute="trailing" id="OPf-NJ-dB7"/>
+                <constraint firstAttribute="trailing" secondItem="ITL-1P-AMd" secondAttribute="trailing" id="Rqv-Dy-bkl"/>
+                <constraint firstItem="8o4-BG-xx1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hQs-PM-e3S"/>
+                <constraint firstAttribute="bottom" secondItem="8o4-BG-xx1" secondAttribute="bottom" id="p1w-gq-BU2"/>
+                <constraint firstAttribute="bottom" secondItem="cjf-7e-Apx" secondAttribute="bottom" id="psO-6e-BKX"/>
+                <constraint firstItem="ITL-1P-AMd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="rzo-Cc-Id8"/>
+                <constraint firstItem="ITL-1P-AMd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="vFS-pt-9Ji"/>
+            </constraints>
+            <point key="canvasLocation" x="33.5" y="53.5"/>
+        </view>
+    </objects>
+</document>
