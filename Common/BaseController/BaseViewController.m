@@ -42,13 +42,11 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
     
-
-    UIImage * bg = [UIImage imageNamed:@"navigation_bar_bj"];
+    UIImage * bg = [UIImage imageNamed:@"appbar_bj"];
     if([self showNavShadow]){
         if (@available(iOS 13.0, *)) {
             self.navigationController.navigationBar.standardAppearance.shadowImage = nil;
             self.navigationController.navigationBar.standardAppearance.backgroundImage = bg;
-            
         }else{
             [self.navigationController.navigationBar setBackgroundImage:bg forBarMetrics:UIBarMetricsDefault];
             [self.navigationController.navigationBar setShadowImage:nil];
@@ -63,6 +61,7 @@
             [self.navigationController.navigationBar setShadowImage:[UIImage new]];
         }
     }
+    
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle{
@@ -70,8 +69,7 @@
 }
 
 +(void)setupAppearance{
-    UIFont * font  = [UIFont fontWithName:@"PingFangSC-Medium" size:15];
-    if(!font) font = [UIFont systemFontOfSize:15];
+    UIFont * font  = [UIFont systemFontOfSize:14];
     NSDictionary* dict = @{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:font};
     [[UIBarButtonItem appearance] setTitleTextAttributes:dict forState:UIControlStateNormal];
     [[UIBarButtonItem appearance] setTitleTextAttributes:dict forState:UIControlStateHighlighted];
@@ -89,13 +87,11 @@
 
     
     if(self.navigationController.viewControllers.count > 1){
-        UIImage * b = [[UIImage imageNamed:@"nav_back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        UIImage * b = [[UIImage imageNamed:@"back_white"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         UIBarButtonItem * back = [[UIBarButtonItem alloc] initWithImage:b style:UIBarButtonItemStylePlain target:self action:@selector(onBack)];
         self.navigationItem.leftBarButtonItem = back;
     }
-
 }
-
 
 
 -(BOOL)showNavShadow{

@@ -19,8 +19,7 @@
     self.interactivePopGestureRecognizer.delegate = self;
     self.delegate = self;
     
-    UIFont * font  = [UIFont fontWithName:@"PingFangSC-Medium" size:15];
-    if(!font) font = [UIFont systemFontOfSize:15];
+    UIFont * font  = [UIFont systemFontOfSize:14];
     NSDictionary* dict = @{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:font};
     
     if (@available(iOS 13.0, *)) {

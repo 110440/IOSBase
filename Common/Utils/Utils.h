@@ -38,6 +38,9 @@
 
 +(NSString*)timeStrFromInterval:(NSTimeInterval)interval;
 
++(NSString *)friendlyDateString:(NSTimeInterval)timeInterval
+                forConversation:(BOOL)isShort;
+
 +(BOOL)isFirstInstallApp;
 
 
