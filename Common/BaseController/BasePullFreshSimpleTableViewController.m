@@ -19,7 +19,9 @@ UITableViewDataSource>
 
 @end
 
-@implementation BasePullFreshSimpleTableViewController
+@implementation BasePullFreshSimpleTableViewController{
+    BOOL _inited;
+}
 
 
 - (void)viewDidLoad {
@@ -27,8 +29,8 @@ UITableViewDataSource>
     
     _rowHeight = -1;
     _estimatedRowHeight = 0;
-    _sectionHeaderHeight = 0.000001;
-    _sectionFooterHeight = 0.000001;
+    _sectionHeaderHeight = CGFLOAT_MIN;
+    _sectionFooterHeight = CGFLOAT_MIN;
     _page = minPage;
     
     [self.view addSubview:self.tableView];
@@ -52,10 +54,17 @@ UITableViewDataSource>
 -(void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
     CGRect frame = self.view.bounds;
-    if (@available(iOS 11.0, *)) {
-        frame.size.height -= self.view.safeAreaInsets.bottom;
-    }
     self.tableView.frame = frame;
+    
+    if(!_inited){
+        _inited = YES;
+        UIEdgeInsets inset = self.tableView.contentInset;
+        if (@available(iOS 11.0, *)) {
+            inset.bottom += self.view.safeAreaInsets.bottom;
+            self.tableView.contentInset = inset;
+        }
+        self.tableView.mj_footer.ignoredScrollViewContentInsetBottom = inset.bottom;
+    }
 }
 
 -(UITableView *)tableView{
@@ -80,7 +89,7 @@ UITableViewDataSource>
 }
 
 -(BOOL)_isMutilSection{
-    return _sectionHeaderHeight >0.000001 || _sectionFooterHeight > 0.000001;
+    return _sectionHeaderHeight >CGFLOAT_MIN || _sectionFooterHeight > CGFLOAT_MIN;
 }
 
 -(id)_modelFromIndex:(NSIndexPath*)index{
@@ -120,7 +129,7 @@ UITableViewDataSource>
             NSIndexSet * inset = [NSIndexSet indexSetWithIndexesInRange:range];
             [self.dataSource addObjectsFromArray:dataSource];
             [self.tableView beginUpdates];
-            [self.tableView insertSections:inset withRowAnimation:UITableViewRowAnimationNone];
+            [self.tableView insertSections:inset withRowAnimation:UITableViewRowAnimationFade];
             [self.tableView endUpdates];
         }else{
             NSMutableArray * paths = @[].mutableCopy;
@@ -130,7 +139,7 @@ UITableViewDataSource>
             }
             [self.dataSource addObjectsFromArray:dataSource];
             [self.tableView beginUpdates];
-            [self.tableView insertRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationNone];
+            [self.tableView insertRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationFade];
             [self.tableView endUpdates];
         }
         
