@@ -69,12 +69,18 @@
 }
 
 +(void)setupAppearance{
-    UIFont * font  = [UIFont systemFontOfSize:14];
-    NSDictionary* dict = @{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:font};
-    [[UIBarButtonItem appearance] setTitleTextAttributes:dict forState:UIControlStateNormal];
-    [[UIBarButtonItem appearance] setTitleTextAttributes:dict forState:UIControlStateHighlighted];
+//    UIFont * font  = [UIFont systemFontOfSize:14];
+//    NSDictionary* dict = @{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:font};
+//    [[UIBarButtonItem appearance] setTitleTextAttributes:dict forState:UIControlStateNormal];
+//    [[UIBarButtonItem appearance] setTitleTextAttributes:dict forState:UIControlStateHighlighted];
+//    
+//    [[UINavigationBar appearance] setBarTintColor:ColorWithHex(0x52973F)];
     
-    [[UINavigationBar appearance] setBarTintColor:ColorWithHex(0x52973F)];
+    //去影响图片选择器
+    UIFont * font2  = [UIFont boldSystemFontOfSize:18];
+    NSDictionary* navTitleDict = @{NSForegroundColorAttributeName:[UIColor blackColor], NSFontAttributeName:font2};
+    [[UINavigationBar appearance] setTitleTextAttributes:navTitleDict];
+    [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
 }
 
 - (void)initNavbar{
