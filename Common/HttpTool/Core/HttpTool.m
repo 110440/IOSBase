@@ -38,11 +38,16 @@ static AFHTTPSessionManager * httpManager;
 +(void) enterHttpError:(NSError*)error task:(NSURLSessionDataTask*)t failBlock:(void(^)(NSError * eMsg))fail{
     
     NSString * emsg = @"网络错误";
-    if(error.code == NSURLErrorTimedOut){
-        emsg = @"网络超时，请稍后再试！";
-    }
-    else if( ((NSHTTPURLResponse*)t.response).statusCode == 404){
+    NSInteger httpCode = ((NSHTTPURLResponse*)t.response).statusCode;
+    if( httpCode == 404){
         emsg = @"服务器错误 404 ";
+    }else if( httpCode == 401){
+        [(AppDelegate*)[UIApplication sharedApplication].delegate showLoginView];
+        [[XBKLUserManager shareManger] logout];
+        [Utils showErrMsg:@"登录失效，请重新登录"];
+        emsg = @"登录失效，请重新登录";
+    }else if(error.code == NSURLErrorTimedOut){
+        emsg = @"网络超时，请稍后再试！";
     }
     else if(error.code == 3840) {
         emsg = @"服务器错误json格式";
@@ -68,9 +73,7 @@ static AFHTTPSessionManager * httpManager;
     }];
     
     NSString * urlStr = [NSString stringWithFormat:@"%@/%@",BASE_URL, path];
-    
-    NSDictionary * heads   = [self http].requestSerializer.HTTPRequestHeaders;
-    [HttpToolLog Log:@" ====== [HTTP] : GET :%@ \n param:%@ reqHeads:%@",urlStr,p,heads];
+    [HttpToolLog Log:@" ====== [HTTP] : GET :%@ \n param:%@ reqHeads:%@",urlStr,p,commHeads];
     
     return [[self http] GET:urlStr parameters:p headers:commHeads progress:^(NSProgress * _Nonnull downloadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -109,8 +112,7 @@ static AFHTTPSessionManager * httpManager;
     
     NSString * urlStr = [NSString stringWithFormat:@"%@/%@",BASE_URL, path];
     
-    NSDictionary * heads   = [self http].requestSerializer.HTTPRequestHeaders;
-    [HttpToolLog Log:@" ====== [HTTP] : Post :%@ \n param:%@ reqHeads:%@",urlStr,p,heads];
+    [HttpToolLog Log:@" ====== [HTTP] : Post :%@ \n param:%@ reqHeads:%@",urlStr,p,commHeads];
     
     return [[self http] POST:urlStr parameters:p headers:commHeads progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -150,8 +152,7 @@ static AFHTTPSessionManager * httpManager;
     
     NSString * urlStr = [NSString stringWithFormat:@"%@/%@",BASE_URL, path];
     
-    NSDictionary * heads   = [self http].requestSerializer.HTTPRequestHeaders;
-    [HttpToolLog Log:@" ====== [HTTP] : delete :%@ \n param:%@ reqHeads:%@",urlStr,p,heads];
+    [HttpToolLog Log:@" ====== [HTTP] : delete :%@ \n param:%@ reqHeads:%@",urlStr,p,commHeads];
     
     return [[self http] DELETE:urlStr parameters:p headers:commHeads success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -191,8 +192,7 @@ static AFHTTPSessionManager * httpManager;
     
     NSString * urlStr = [NSString stringWithFormat:@"%@/%@",BASE_URL, path];
     
-    NSDictionary * heads   = [self http].requestSerializer.HTTPRequestHeaders;
-    [HttpToolLog Log:@" ====== [HTTP] : PUT :%@ \n param:%@ reqHeads:%@",urlStr,p,heads];
+    [HttpToolLog Log:@" ====== [HTTP] : PUT :%@ \n param:%@ reqHeads:%@",urlStr,p,commHeads];
     
     return [[self http] PUT:urlStr parameters:p headers:commHeads success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         

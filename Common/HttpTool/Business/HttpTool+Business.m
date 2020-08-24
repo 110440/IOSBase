@@ -51,7 +51,7 @@
     if(code == 0){
         return jsonObj[@"data"];
     }
-    else if(code == 10002){
+    else if(code == 10002 || code == 401){
         [(AppDelegate*)[UIApplication sharedApplication].delegate showLoginView];
         [[XBKLUserManager shareManger] logout];
         [Utils showErrMsg:@"登录失效，请重新登录"];
